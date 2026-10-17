@@ -230,13 +230,21 @@
       <p class="fine">El ePub no trae la paginación impresa: la página se estima a 300 palabras por página desde el capítulo I.</p>`;
   }
   const YT = window.JAZZ_YT || {};
+  // Páginas que mencionan cada disco o canción (tools/pdfpages.py), como enlaces al PDF.
+  const PAGES = window.JAZZ_PAGES || {};
+  const pagesHtml = (t) => {
+    const ps = PAGES[`${t.a}|${t.t}`];
+    if (!ps) return '';
+    return ` <span class="pgs">${ps.length > 1 ? 'págs.' : 'pág.'} ${ps.map(([, p]) => `<a class="pg" href="${encodeURI(PDF)}#page=${p}" target="_blank" rel="noopener" title="Abrir el libro en PDF por esta página">${p}</a>`).join(' · ')}</span>`;
+  };
+
   function trackHtml(t, extra = '') {
     const v = YT[`${t.a}|${t.t}`];
     const search = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(`${t.a} ${t.t}`.replace(/\([^)]*\)/g, ''));
     const links = v
       ? `<button class="play" data-v="${esc(v.id)}" title="Reproducir aquí: ${esc(v.title)}">▶</button><a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener" title="${esc(v.title)} · ${esc(v.channel)}">↗</a>`
       : `<a href="${search}" target="_blank" rel="noopener" title="Buscar en YouTube">🔍</a>`;
-    return `<li${t.ess ? ' class="ess" title="En la discografía recomendada del libro"' : ''}><span class="tt">${t.ess ? '<i class="star">★</i> ' : ''}<b>${esc(t.a)}</b> — ${esc(t.t)} ${t.y ? `<span class="y">(${t.y})</span>` : ''}${extra}</span><span class="act">${links}</span></li>`;
+    return `<li${t.ess ? ' class="ess" title="En la discografía recomendada del libro"' : ''}><span class="tt">${t.ess ? '<i class="star">★</i> ' : ''}<b>${esc(t.a)}</b> — ${esc(t.t)} ${t.y ? `<span class="y">(${t.y})</span>` : ''}${pagesHtml(t)}${extra}</span><span class="act">${links}</span></li>`;
   }
 
   // Un único reproductor en toda la página: se abre bajo el disco pulsado y se cierra al volver a pulsarlo.
