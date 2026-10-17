@@ -21,6 +21,7 @@ fi
 python3 -I tools/split.py build/txt/OEBPS/Text build/chapters > /dev/null
 node tools/check.js data
 python3 -I tools/refs.py data build/chapters/book.json
+python3 -I tools/pdfpages.py data/refs.js "${EPUB%.epub}.pdf=$EPUB"
 if [ "$1" = "--yt" ]; then
 python3 -I tools/yt.py data | grep -v "^OK  " || true
 if [ -n "$LASTFM_API_KEY" ]; then python3 -I tools/covers.py; else echo "Sin LASTFM_API_KEY: no se actualizan las portadas"; fi

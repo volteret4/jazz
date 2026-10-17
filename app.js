@@ -208,6 +208,11 @@
     return `<button class="chip" data-go="${id}"><i style="background:${FAMILIES[g.family].color}"></i>${esc(g.name)}</button>`;
   }
   const REFS = window.JAZZ_REFS || {};
+  // El libro en PDF (generado desde el ePub por tools/pdfpages.py): cada cita enlaza a su página.
+  const PDF = 'Historia_del_jazz_Ted_Gioia.pdf';
+  const pageLink = (loc) => loc.pdf
+    ? `<a class="pg" href="${encodeURI(PDF)}#page=${loc.pdf}" target="_blank" rel="noopener" title="Abrir el libro en PDF por esta página">pág. ${loc.pdf}</a>`
+    : `≈ pág. ${loc.page}`;
   function mark(para, q) {
     const i = para.toLowerCase().replace(/’/g, "'").indexOf(q.toLowerCase().replace(/’/g, "'"));
     if (i < 0) return esc(para);
@@ -217,10 +222,10 @@
     return `<div class="desc"><div class="src">Resumen a partir del libro · ${esc(chapterName(g.descCh))}</div>${esc(g.desc || '')}</div>`;
   }
   function refsHtml(g) {
-    const refs = g.refs.map((r) => ({ ...r, loc: REFS[r.q] })).sort((a, b) => (a.loc ? a.loc.page : 1e6) - (b.loc ? b.loc.page : 1e6));
+    const refs = g.refs.map((r) => ({ ...r, loc: REFS[r.q] })).sort((a, b) => (a.loc ? a.loc.pdf || a.loc.page : 1e6) - (b.loc ? b.loc.pdf || b.loc.page : 1e6));
     const others = g.chapters.filter((c) => !g.refs.some((r) => r.ch === c));
     if (!refs.length && !others.length) return '';
-    return `<h4>Pasajes del libro (${refs.length})</h4>${refs.map((r, i) => `<details class="ref"${i < 2 ? ' open' : ''}><summary class="where">${esc(chapterName(r.ch))}${r.loc ? `${r.loc.sec ? ` · ${esc(r.loc.sec)}` : ''} · <b>≈ pág. ${r.loc.page}</b>` : ''}</summary><blockquote>${r.loc ? mark(r.loc.para, r.q) : esc(r.q)}</blockquote></details>`).join('')}
+    return `<h4>Pasajes del libro (${refs.length})</h4>${refs.map((r, i) => `<details class="ref"${i < 2 ? ' open' : ''}><summary class="where">${esc(chapterName(r.ch))}${r.loc ? `${r.loc.sec ? ` · ${esc(r.loc.sec)}` : ''} · <b>${pageLink(r.loc)}</b>` : ''}</summary><blockquote>${r.loc ? mark(r.loc.para, r.q) : esc(r.q)}</blockquote></details>`).join('')}
       ${others.length ? `<div class="tags">${others.map((c) => `<span>${esc(chapterName(c))}</span>`).join('')}</div>` : ''}
       <p class="fine">El ePub no trae la paginación impresa: la página se estima a 300 palabras por página desde el capítulo I.</p>`;
   }
