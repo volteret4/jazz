@@ -483,6 +483,9 @@
     matches: trackMatches, isKey: (t) => t.ess, keyLabel: 'Solo discografía recomendada ★', keyName: 'en la discografía recomendada',
     where: (r) => r.chs.slice().sort((a, b) => a - b).map((c) => esc(chapterName(c))).join(' · '),
   });
+  // Pestaña «Menciones» (menciones.js, común a todas las webs de Music_Books).
+  Menciones({ all, FAMILIES, esc, trackHtml, togglePlayer, open, portadas, data: window.JAZZ_COVERS,
+    pageLink: (m) => pageLink({ pdf: m[1] }) });
   function render() {
     $('#ftoggle').classList.toggle('active', !!state.q || state.off.size > 0);
     renderTimeline(); renderList(); renderDiscs('discs', false); renderDiscs('ess', true); renderByChapter(); portadas.render(); stickMain(); fitScrollers(); }
