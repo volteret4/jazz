@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"
+ "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"><ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta content="urn:uuid:e5eb468e-4b03-4893-b2a4-e662283e7a94" name="dtb:uid"/>
+    <meta content="1" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>Historia del jazz</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1" playOrder="1">
+      <navLabel>
+        <text>Cubierta</text>
+      </navLabel>
+      <content src="Text/cubierta.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-2" playOrder="2">
+      <navLabel>
+        <text>Historia del jazz</text>
+      </navLabel>
+      <content src="Text/titulo.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-3" playOrder="3">
+      <navLabel>
+        <text>I. La prehistoria del jazz</text>
+      </navLabel>
+      <content src="Text/003.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-4" playOrder="4">
+      <navLabel>
+        <text>II. El jazz de Nueva Orleans</text>
+      </navLabel>
+      <content src="Text/005.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-5" playOrder="5">
+      <navLabel>
+        <text>III. La era del jazz</text>
+      </navLabel>
+      <content src="Text/007.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-6" playOrder="6">
+      <navLabel>
+        <text>IV. Harlem</text>
+      </navLabel>
+      <content src="Text/009.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-7" playOrder="7">
+      <navLabel>
+        <text>V. La era del swing</text>
+      </navLabel>
+      <content src="Text/011.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-8" playOrder="8">
+      <navLabel>
+        <text>VI. El jazz moderno</text>
+      </navLabel>
+      <content src="Text/013.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-9" playOrder="9">
+      <navLabel>
+        <text>VII. La fragmentación de los estilos de jazz</text>
+      </navLabel>
+      <content src="Text/015.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-10" playOrder="10">
+      <navLabel>
+        <text>VIII. El free jazz y el jazz posmoderno</text>
+      </navLabel>
+      <content src="Text/017.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-11" playOrder="11">
+      <navLabel>
+        <text>Bibliografía recomendada</text>
+      </navLabel>
+      <content src="Text/018.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-12" playOrder="12">
+      <navLabel>
+        <text>Discografía recomendada</text>
+      </navLabel>
+      <content src="Text/019.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-13" playOrder="13">
+      <navLabel>
+        <text>Agradecimientos</text>
+      </navLabel>
+      <content src="Text/020.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-14" playOrder="14">
+      <navLabel>
+        <text>Índice onomástico y temático</text>
+      </navLabel>
+      <content src="Text/021.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-15" playOrder="15">
+      <navLabel>
+        <text>Índice de canciones y álbumes</text>
+      </navLabel>
+      <content src="Text/023.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-16" playOrder="16">
+      <navLabel>
+        <text>Autor</text>
+      </navLabel>
+      <content src="Text/autor.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-17" playOrder="17">
+      <navLabel>
+        <text>Notas</text>
+      </navLabel>
+      <content src="Text/notas.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>

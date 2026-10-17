@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historia del jazz: timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Historia del jazz <span>· de Congo Square al siglo XXI, según Ted Gioia</span></h1>
+    <p class="sub">Timeline de estilos, escenas, influencias y grabaciones, construido capítulo a capítulo a partir de <i>Historia del jazz</i> (Ted Gioia; Turner / Fondo de Cultura Económica), con citas del libro y su vídeo en YouTube.</p>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<nav class="controls">
+  <input id="q" type="search" placeholder="Buscar estilo, músico, disco, tema…" autocomplete="off">
+  <button id="ftoggle" class="ftoggle" type="button" aria-expanded="false">Filtros</button>
+  <div class="views" role="tablist">
+    <button data-view="timeline" class="on">Timeline</button>
+    <button data-view="focus">Individual</button>
+    <button data-view="list">Estilos</button>
+    <button data-view="discs">Discos</button>
+    <button data-view="ess">Recomendados</button>
+    <button data-view="bych">Capítulos</button>
+    <button data-view="covers">Portadas</button>
+  </div>
+  <div class="families" id="families"></div>
+</nav>
+
+<main>
+  <section id="timeline" class="view on">
+    <p class="hint"><span class="mouse">Pasa el ratón por un estilo para ver de dónde viene (líneas entrantes) y qué engendra (salientes). Clic para abrir la ficha; clic en una zona vacía para cerrarla.</span><span class="touch">Desliza para recorrer los años; toca un estilo para abrir su ficha.</span></p>
+    <div class="scroller" id="scroller"><svg id="svg"></svg></div>
+  </section>
+  <section id="focus" class="view">
+    <div class="fbar">
+      <input id="fq" type="search" list="focus-names" placeholder="Elige un estilo…" autocomplete="off">
+      <datalist id="focus-names"></datalist>
+      <button id="freset" type="button">Reiniciar</button>
+    </div>
+    <p class="hint" id="fhint">Escribe y elige un estilo: verás de cuáles viene y a cuáles influye. Pulsa «+» en cualquiera de ellos para desplegar también sus relaciones; clic en un estilo abre su ficha.</p>
+    <div class="scroller" id="fscroller"><svg id="fsvg"></svg></div>
+  </section>
+  <section id="list" class="view"></section>
+  <section id="discs" class="view discs"></section>
+  <section id="ess" class="view discs"></section>
+  <section id="bych" class="view discs"></section>
+  <section id="covers" class="view"></section>
+</main>
+
+<aside id="panel" aria-hidden="true">
+  <button class="close" id="close" aria-label="Cerrar">×</button>
+  <div id="detail"></div>
+</aside>
+
+<script src="data/core.js"></script>
+<!-- capitulos:inicio -->
+<script src="data/01-prehistoria.js"></script>
+<script src="data/02-nueva-orleans.js"></script>
+<script src="data/03-era-del-jazz.js"></script>
+<script src="data/04-harlem.js"></script>
+<script src="data/05-swing.js"></script>
+<script src="data/06-jazz-moderno.js"></script>
+<script src="data/07-fragmentacion.js"></script>
+<script src="data/08-free-posmoderno.js"></script>
+<script src="data/09-discografia.js"></script>
+<!-- capitulos:fin -->
+<script src="data/refs.js"></script>
+<script src="data/yt.js"></script>
+<script src="data/covers.js"></script>
+<script src="covers.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
