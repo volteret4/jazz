@@ -35,4 +35,4 @@ block = '<!-- capitulos:inicio -->\n' + sys.argv[1].replace('\\n', '\n') + '<!--
 s = re.sub(r'<!-- capitulos:inicio -->.*?<!-- capitulos:fin -->', block, s, flags=re.S)
 open(p, 'w').write(s)
 PY
-for f in data/*.js app.js covers.js; do node --check "$f"; done
+for f in data/*.js app.js covers.js menciones.js; do node --check "$f"; done

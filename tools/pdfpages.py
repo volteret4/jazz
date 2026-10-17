@@ -26,7 +26,9 @@ discos, para la pestaña Menciones. El nombre completo se busca respetando mayú
 exige el artículo: The/los/las); un dúo «A & B» o «A and B» de nombres de dos palabras busca a
 cada uno. El apellido solo («Parker») cuenta si el nombre completo salió en las páginas
 anteriores (SURNAME_PAGES) y no va pegado a otro nombre propio; si varios artistas comparten
-apellido, es del último nombrado. Se descartan las páginas de índice (fragmentos con muchas cifras).
+apellido, es del último nombrado. Un nombre de una sola palabra («Can», «Love») no cuenta pegado a otra
+palabra en mayúscula ni seguido de apóstrofo. Se quitan las cabeceras y pies repetidos y se descartan
+las páginas de índice (fragmentos con muchas cifras).
 """
 import bisect
 import json
@@ -114,6 +116,29 @@ def clean(page):
     return re.sub(r'\s+', ' ', re.sub(r'(\w)-\n\s*(\w)', r'\1\2', page)).strip()
 
 
+def running_lines(raw):
+    """Cabeceras y pies de página: líneas que se repiten en muchas páginas."""
+    count = {}
+    for page in raw:
+        lines = [l.strip() for l in page.splitlines() if l.strip()]
+        for l in set(lines[:2] + lines[-2:]):
+            count[l] = count.get(l, 0) + 1
+    return {l for l, n in count.items() if n >= max(5, len(raw) // 5)}
+
+
+def standalone(text, s, e, prev_ok=False, common=False):
+    """Un nombre de una palabra no cuenta pegado a otra en mayúscula («Free Speech», «I Can't»);
+    si además es una palabra corriente del libro («However»), tampoco a principio de frase."""
+    if re.match(r"['’]\w", text[e:e + 2]) or re.match(r' [A-ZÁÉÍÓÚÑ]', text[e:e + 2]):
+        return False
+    if prev_ok:
+        return True
+    prev = (text[:s].rstrip().split(' ')[-1:] or [''])[0]
+    if not prev or re.search(r'[.:;!?»”"•]$', prev):
+        return not common
+    return not prev[:1].isupper()
+
+
 def person_names(a):
     """Los nombres que se buscan para un artista de los datos."""
     a = BAND.sub('', a.strip())
@@ -145,16 +170,21 @@ def artist_mentions(artists, books_raw, printed=None):
             if len(w) >= 2 and len(w[-1]) >= 4 and w[-1][0].isupper() and not ARTICLE.match(n) and not any(c.isdigit() for c in w[-1]):
                 by_surname.setdefault(w[-1], set()).add(a)
     sur_re = {w: re.compile(r'(?<![\w])' + re.escape(w) + r'(?![\w])') for w in by_surname}
+    single = {a for a in artists if len(person_names(a)) == 1 and len((ARTICLE.match(person_names(a)[0]) or [None, person_names(a)[0]])[1].split()) == 1}
     out = {}
     for b, raw in enumerate(books_raw):
         last = {}
+        drop = running_lines(raw)
+        lower = set(re.findall(r'(?<![\w])[a-záéíóúñ]+(?![\w])', '\n'.join(raw)))
         for i, page in enumerate(raw):
-            text = clean(page)
+            text = clean('\n'.join(l for l in page.splitlines() if l.strip() not in drop))
             hits, taken = {}, []
             for a in artists:
                 if not any(w in text for w in probe[a]):
                     continue
-                found = [[(m.start(), m.end()) for m in rx.finditer(text)] for rx in full[a]]
+                found = [[(m.start(), m.end()) for m in rx.finditer(text)
+                          if a not in single or standalone(text, m.start(), m.end(), prev_ok=bool(ARTICLE.match(a)),
+                                                           common=a.lower() in lower)] for rx in full[a]]
                 if not all(found):
                     continue
                 for f in found:
@@ -168,8 +198,7 @@ def artist_mentions(artists, books_raw, printed=None):
                 for m in sur_re[w].finditer(text):
                     if any(s <= m.start() < e for s, e in taken):
                         continue
-                    prev = text[:m.start()].rstrip().split(' ')[-1:] or ['']
-                    if prev[0][:1].isupper() and not re.search(r'[.:;!?»”"]$', prev[0]):
+                    if not standalone(text, m.start(), m.end()):
                         continue      # pegado a otro nombre propio: «Evan Parker», «Beach Boys»
                     near = [(last[a], a) for a in owners if a in last and i - last[a] <= SURNAME_PAGES]
                     if near:

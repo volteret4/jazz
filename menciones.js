@@ -88,6 +88,14 @@ window.Menciones = function (cfg) {
       <div class="mscroll"><div class="mgrid" style="width:${LABEL + W}px;--label:${LABEL}px">
         <div class="maxis" style="width:${W}px">${axis}</div>${rows}</div></div>
       <p class="fine">Cada barra es un artista, partida en los discos y canciones que el libro cita de él (las canciones de un mismo disco forman un tramo), con el color de su género. Pulsa un artista para ver los pasajes que lo nombran.</p>`;
+    // Arrancar en los años del género elegido.
+    // Las barras se recortan por la izquierda lo que se haya desplazado el timeline, para que no
+    // asomen bajo la columna fija de nombres.
+    const sc = box.querySelector('.mscroll');
+    const clip = () => sc.firstElementChild.style.setProperty('--sl', sc.scrollLeft + 'px');
+    sc.addEventListener('scroll', clip, { passive: true });
+    sc.scrollLeft = Math.max(0, x(Math.max(Y0, G.start)) - 40);
+    clip();
   }
 
   box.addEventListener('change', (e) => {
