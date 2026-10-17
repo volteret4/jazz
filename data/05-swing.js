@@ -192,7 +192,7 @@ JAZZ.add([
     labels: ['Hot Club de France', 'Le Jazz Hot', 'Orkester Journalen', 'Sala Pleyel'],
     tracks: [
       { a: 'Quintette du Hot Club de France', t: 'Dinah', y: 1934 },
-      { a: 'Quintette du Hot Club de France', t: 'Djangology', y: 1935 },
+      { a: 'Quintette du Hot Club de France', t: 'Djangology', y: 1935, yq: 'Django Reinhardt Djangology Stephane Grappelli' },
       { a: 'Quintette du Hot Club de France', t: 'Limehouse Blues', y: 1936 },
       { a: 'Quintette du Hot Club de France', t: 'Minor Swing', y: 1937 },
       { a: 'Quintette du Hot Club de France', t: 'Chicago', y: 1937 },

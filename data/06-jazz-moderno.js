@@ -80,7 +80,7 @@ JAZZ.add([
       { a: 'Benny Goodman', t: 'Stealin\' Apples', y: 1948 },
       { a: 'Bud Powell', t: 'Wail', y: 1949 },
       { a: 'J. J. Johnson', t: 'Lament', y: 1954 },
-      { a: 'J. J. Johnson', t: 'Perceptions', y: 1961 },
+      { a: 'J. J. Johnson', t: 'Perceptions', y: 1961, yq: 'J.J. Johnson Perceptions Gunther Schuller 1961' },
     ],
     influences: ['bebop'],
     refs: [
@@ -95,8 +95,8 @@ JAZZ.add([
     artists: ['Dizzy Gillespie', 'Chano Pozo', 'Mario Bauza', 'Machito', 'Gil Fuller', 'George Russell'],
     labels: ['Carnegie Hall (1947)', 'Afro-Cubans'],
     tracks: [
-      { a: 'Jelly Roll Morton', t: 'Mamanita', y: 1929 },
-      { a: 'Jelly Roll Morton', t: 'Creepy Feeling', y: 1938 },
+      { a: 'Jelly Roll Morton', t: 'Mamanita', y: 1929, yq: 'Jelly Roll Morton Mamanita piano solo' },
+      { a: 'Jelly Roll Morton', t: 'Creepy Feeling', y: 1938, yq: 'Jelly Roll Morton Creepy Feeling Library of Congress' },
       { a: 'Dizzy Gillespie', t: 'Things to Come', y: 1946 },
       { a: 'Dizzy Gillespie', t: 'Ray\'s Idea', y: 1946 },
       { a: 'Dizzy Gillespie', t: 'Manteca', y: 1947 },
@@ -325,7 +325,7 @@ JAZZ.add([
     labels: ['El Saturn', 'Impulse!'],
     tracks: [
       { a: 'Sun Ra', t: 'Supersonic Jazz', y: 1957 },
-      { a: 'Sun Ra', t: 'Cosmic Tones for Mental Therapy', y: 1963 },
+      { a: 'Sun Ra', t: 'Cosmic Tones for Mental Therapy', y: 1963, yq: 'Sun Ra Cosmic Tones for Mental Therapy And Otherness' },
       { a: 'Sun Ra', t: 'Monorails and Satellites', y: 1966 },
     ],
     influences: ['henderson-redman', 'bebop', 'big-bands-bop'],
@@ -344,7 +344,7 @@ JAZZ.add([
       { a: 'Thad Jones-Mel Lewis Orchestra', t: 'Willow Weep for Me', y: 1970 },
       { a: 'Toshiko Akiyoshi-Lew Tabackin Big Band', t: 'American Ballad', y: 1974 },
       { a: 'Toshiko Akiyoshi-Lew Tabackin Big Band', t: 'The First Night', y: 1974 },
-      { a: 'Maria Schneider', t: 'Evanescence', y: 1994 },
+      { a: 'Maria Schneider', t: 'Evanescence', y: 1994, yq: 'Maria Schneider Evanescence Wyrgly' },
       { a: 'Maria Schneider', t: 'Coming About', y: 1996 },
     ],
     influences: ['count-basie', 'big-bands-bop', 'kenton'],

@@ -185,7 +185,7 @@ JAZZ.add([
       { q: 'Las historias del jazz no han hecho suficiente justicia a este maestro de mil estilos' },
     ] },
   { id: 'king-oliver',
-    tracks: [{ a: 'King Oliver', t: 'Construction Gang', y: 1924 }] },
+    tracks: [{ a: 'King Oliver', t: 'Construction Gang', y: 1924, yq: 'King Oliver Construction Gang 1930' }] },
   { id: 'jelly-roll-morton',
     tracks: [{ a: 'Jelly Roll Morton and King Oliver', t: 'King Porter', y: 1924 }] },
 ], 3);
