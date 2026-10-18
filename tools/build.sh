@@ -19,13 +19,7 @@ PY
   while read -r f; do mkdir -p "build/txt/$(dirname "$f")"; pandoc -f html -t plain --wrap=none "build/epub/$f" -o "build/txt/${f%.*}.txt"; done < build/spine.txt
 fi
 python3 -I tools/split.py build/txt/OEBPS/Text build/chapters > /dev/null
-node tools/check.js data
-python3 -I tools/refs.py data build/chapters/book.json
-python3 -I tools/pdfpages.py data/refs.js "${EPUB%.epub}.pdf=$EPUB"
-if [ "$1" = "--yt" ]; then
-python3 -I tools/yt.py data | grep -v "^OK  " || true
-if [ -n "$LASTFM_API_KEY" ]; then python3 -I tools/covers.py; else echo "Sin LASTFM_API_KEY: no se actualizan las portadas"; fi
-fi
+# Primero las etiquetas <script> de los capítulos: los pasos siguientes leen los datos desde index.html.
 tags=$(for f in data/[0-9]*.js; do printf '<script src="%s"></script>\\n' "$f"; done)
 python3 -I - "$tags" <<'PY'
 import re, sys
@@ -35,4 +29,12 @@ block = '<!-- capitulos:inicio -->\n' + sys.argv[1].replace('\\n', '\n') + '<!--
 s = re.sub(r'<!-- capitulos:inicio -->.*?<!-- capitulos:fin -->', block, s, flags=re.S)
 open(p, 'w').write(s)
 PY
+node tools/check.js data
+python3 -I tools/refs.py data build/chapters/book.json
+python3 -I tools/pdfpages.py data/refs.js "${EPUB%.epub}.pdf=$EPUB"
+if [ "$1" = "--yt" ]; then
+python3 -I tools/yt.py data | grep -v "^OK  " || true
+if [ -n "$LASTFM_API_KEY" ]; then python3 -I tools/covers.py; else echo "Sin LASTFM_API_KEY: no se actualizan las portadas"; fi
+python3 -I tools/discos.py
+fi
 for f in data/*.js app.js covers.js menciones.js; do node --check "$f"; done

@@ -21,7 +21,7 @@ def norm(s):
 
 
 def main(txt, js):
-    text = Path(txt).read_text().replace("''", '"')
+    text = Path(txt).read_text().replace("''", '"').replace('“', '"').replace('”', '"')
     titles = []
     for f in Path(js).parent.glob('[0-9]*.js'):
         titles += [norm(t) for t in re.findall(r"\bt:\s*'((?:[^'\\]|\\.)*)'", f.read_text())]
